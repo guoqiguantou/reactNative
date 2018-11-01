@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     input:{
         width:'100%',
         height: 30,
-        fontSize:12,
+        fontSize:14,
         marginVertical:10,
         paddingVertical:0,
         paddingHorizontal:10,
@@ -176,8 +176,11 @@ const styles = StyleSheet.create({
     forgetPassword:{
         height: 50,
         lineHeight:50,
-        fontSize: 12,
-        color: "#666666"
+        fontSize: 14,
+        color: "#666666",
+        padding:0,
+        margin:0,
+        textAlignVertical:'center',
     },
     buttonitem:{
         height: 50,
@@ -198,18 +201,20 @@ const styles = StyleSheet.create({
         lineHeight:50,
         fontSize: 18,
         color:'#fff',
+        textAlignVertical:'center',
 
     },
     footeritem:{
         height: 20,
         lineHeight: 20,
         flexDirection:'row',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
     },
     footertext:{
         fontSize: 16,
-
         color: "#f10000",
+        lineHeight: 20,
+        textAlignVertical:'center',
     }
 
 });

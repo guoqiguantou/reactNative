@@ -138,7 +138,8 @@ const styles = StyleSheet.create({
         height: 20,
         fontSize: 12,
         lineHeight: 20,
-        color: "#333333"
+        color: "#333333",
+        textAlign:'center',
     },
     notice:{
         height: 26,
@@ -159,6 +160,7 @@ const styles = StyleSheet.create({
         lineHeight: 20,
         color: "#333333",
         paddingHorizontal:10,
+        textAlignVertical:'center',
     },
     topic:{
         height: 80,
@@ -235,7 +237,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         lineHeight: 20,
         color: "#b3b3b3",
-        marginHorizontal:5,
+        marginRight:5,
     },
     hotspotlistbtn:{
         flexDirection:'row',
