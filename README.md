@@ -1,6 +1,6 @@
 # reactnative
 
-用到的库：
+用到的库
 react-navigation：导航器路由
 react-native-tab-navigator：底部Tab切换
 react-native-splash-screen ：启动屏
