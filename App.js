@@ -10,6 +10,7 @@ const MainStack = createStackNavigator(
     {
         Home: {
             screen: Home,
+
         },
         Login:{
             screen: Login

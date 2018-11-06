@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text,Image ,StyleSheet } from 'react-native';
+import {View, Text, Image, StyleSheet, Alert} from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import CXIcon from "react-native-vector-icons/CXIcon";
 import Index from './Index/index'
+import My from './My/index'
+
 export default class Home extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedTab: 'index1' };
-
-
+        this.state = { selectedTab: 'index5' };
     }
     render() {
         return (
@@ -59,7 +59,7 @@ export default class Home extends React.Component {
                         renderIcon={() => <CXIcon name="mea" size={25} color='#666666'></CXIcon>}
                         renderSelectedIcon={() =><CXIcon name="mea" size={25} color='#F10000'></CXIcon>}
                         onPress={() => this.setState({ selectedTab: 'index5' })}>
-                        {<View><Text>我的</Text></View>}
+                        <My/>
                     </TabNavigator.Item>
                 </TabNavigator>
 

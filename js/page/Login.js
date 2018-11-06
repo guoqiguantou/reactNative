@@ -1,107 +1,140 @@
 import React from "react";
-import {View, Text, TouchableHighlight, StyleSheet,TextInput,Alert} from 'react-native';
+import {View, Text, TouchableHighlight, StyleSheet, TextInput, TouchableOpacity, Image,Alert} from 'react-native';
 import CXIcon from "react-native-vector-icons/CXIcon";
 import Message from '../common/Message'
+import NavigationBar from '../common/NavigationBar'
+import SplashScreen from 'react-native-splash-screen'
+
 export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            phone:null,
-            password:null,
-            isShow:true
+            phone: null,
+            password: null,
+            isShow: true
         };
     }
-    inputChange=(text,name)=>{
+
+    componentDidMount() {
+        //在显示启动画面时执行操作
+        //完成某些操作（例如异步任务）后，隐藏启动画面
+        setTimeout(function () {
+            SplashScreen.hide();
+        }, 500)
+
+    }
+
+    inputChange = (text, name) => {
         this.setState({
-            [name]:text
+            [name]: text
         })
 
     }
-    clearPhone=()=>{
+    clearPhone = () => {
         this.setState({
-            phone:null,
+            phone: null,
         })
     }
-    clearPassword=()=>{
+    clearPassword = () => {
         this.setState({
-            password:null,
+            password: null,
         })
     }
-    showChange=()=>{
+    showChange = () => {
         this.setState({
-            isShow:!this.state.isShow,
+            isShow: !this.state.isShow,
         })
     }
-    submitfunc=()=>{
-        //this.child.init('账号或密码错误');
-        let {phone,password}=this.state;
-        if(phone==''||phone==null||phone==' '){
+    submitfunc = () => {
+        let {phone, password} = this.state;
+        if (phone == '' || phone == null || phone == ' ') {
             this.child.init('手机号不能为空');
-        }else if(password==''||password==null||password==' '){
+        } else if (password == '' || password == null || password == ' ') {
             this.child.init('密码不能为空');
-        }else{
+        } else {
             this.props.navigation.navigate('Home');
         }
-
-
 
 
     }
     onRef = (ref) => {
         this.child = ref
     }
+
     render() {
-        const {navigation} = this.props;
-        let{phone,password,isShow}=this.state;
+
+        let {phone, password, isShow} = this.state;
         return (
             <View style={styles.warp}>
-
+                <NavigationBar
+                    title={'登录'}
+                    style={{
+                        backgroundColor: '#fff',
+                    }}
+                    titlestyle={{
+                        color: '#333'
+                    }}
+                    stateBar={{
+                        backgroundColor: 'red'
+                    }}
+                    leftButton={
+                        <TouchableOpacity onPress={() => {
+                            this.props.navigation.goBack()
+                        }}>
+                            <Image source={require("../../res/img/left.png")}
+                                   style={{width: 16, height: 16, margin: 5}}/>
+                        </TouchableOpacity>
+                    }
+                />
                 <View style={styles.logincon}>
                     <View style={styles.inputitem}>
                         <View style={styles.inputitemLeft}>
-                            <CXIcon name="mobile" size={15} color='#b2b2b2' style={{lineHeight:50}}></CXIcon>
+                            <CXIcon name="mobile" size={15} color='#b2b2b2' style={{lineHeight: 50}}></CXIcon>
                         </View>
                         <View style={styles.inputitemContent}>
                             <TextInput
                                 style={styles.input}
-                                onChangeText={(phone)=>this.inputChange(phone,'phone')}
+                                onChangeText={(phone) => this.inputChange(phone, 'phone')}
                                 value={phone}
                                 placeholder={'请输入手机号码'}
                                 placeholderTextColor={'#999'}
                             />
                             {
-                                phone&&
-                                <View style={styles.remove}  >
-                                    <CXIcon name="X" size={15} color='#b2b2b2' style={{lineHeight:50}} onPress={this.clearPhone}></CXIcon>
+                                phone &&
+                                <View style={styles.remove}>
+                                    <CXIcon name="delete" size={15} color='#b2b2b2' style={{lineHeight: 50}}
+                                            onPress={this.clearPhone}></CXIcon>
                                 </View>
                             }
                         </View>
                     </View>
                     <View style={styles.inputitem}>
                         <View style={styles.inputitemLeft}>
-                            <CXIcon name="mima" size={15} color='#b2b2b2' style={{lineHeight:50}}></CXIcon>
+                            <CXIcon name="password" size={15} color='#b2b2b2' style={{lineHeight: 50}}></CXIcon>
                         </View>
                         <View style={styles.inputitemContent}>
                             <TextInput
                                 style={styles.input}
-                                onChangeText={(password)=>this.inputChange(password,'password')}
+                                onChangeText={(password) => this.inputChange(password, 'password')}
                                 value={password}
                                 placeholder={'请输入密码'}
-                                secureTextEntry={isShow?true:false}
+                                secureTextEntry={isShow ? true : false}
                                 placeholderTextColor={'#999'}
                             />
                             {
-                                password&&
+                                password &&
                                 <View style={styles.remove}>
-                                    <CXIcon name="X" size={15} color='#b2b2b2' style={{lineHeight:50}} onPress={this.clearPassword}></CXIcon>
+                                    <CXIcon name="delete" size={15} color='#b2b2b2' style={{lineHeight: 50}}
+                                            onPress={this.clearPassword}></CXIcon>
                                 </View>
                             }
                         </View>
                         <View style={styles.inputitemRight}>
                             <View style={styles.isshow}>
-                                <CXIcon name={isShow?'yanjing':'yanjing1'} size={15} color='#b2b2b2' style={{lineHeight:50}} onPress={this.showChange}></CXIcon>
+                                <CXIcon name={isShow ? 'close' : 'eye'} size={15} color='#b2b2b2'
+                                        style={{lineHeight: 50}} onPress={this.showChange}></CXIcon>
                             </View>
-                            <Text style={styles.forgetPassword} >忘记密码</Text>
+                            <Text style={styles.forgetPassword}>忘记密码</Text>
                         </View>
                     </View>
                     <TouchableHighlight style={styles.buttonitem} onPress={this.submitfunc}>
@@ -139,50 +172,50 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 9,
         shadowOpacity: 1,
-        marginBottom:20,
-        paddingHorizontal:20,
-        flexDirection:'row'
+        marginBottom: 20,
+        paddingHorizontal: 20,
+        flexDirection: 'row'
     },
-    inputitemLeft:{
+    inputitemLeft: {
         width: 15,
         height: 50
 
     },
-    inputitemContent:{
+    inputitemContent: {
         height: 50,
-        flex:1,
-        flexDirection:'row'
+        flex: 1,
+        flexDirection: 'row'
     },
-    input:{
-        width:'100%',
+    input: {
+        width: '100%',
         height: 30,
-        fontSize:14,
-        marginVertical:10,
-        paddingVertical:0,
-        paddingHorizontal:10,
-        flex:1,
+        fontSize: 14,
+        marginVertical: 10,
+        paddingVertical: 0,
+        paddingHorizontal: 10,
+        flex: 1,
     },
-    remove:{
+    remove: {
         width: 15,
         height: 50,
     },
-    inputitemRight:{
+    inputitemRight: {
         height: 50,
-        flexDirection:'row'
+        flexDirection: 'row'
     },
-    isshow:{
-        marginHorizontal:5
+    isshow: {
+        marginHorizontal: 5
     },
-    forgetPassword:{
+    forgetPassword: {
         height: 50,
-        lineHeight:50,
+        lineHeight: 50,
         fontSize: 14,
         color: "#666666",
-        padding:0,
-        margin:0,
-        textAlignVertical:'center',
+        padding: 0,
+        margin: 0,
+        textAlignVertical: 'center',
     },
-    buttonitem:{
+    buttonitem: {
         height: 50,
         borderRadius: 25,
         backgroundColor: "#f10000",
@@ -193,28 +226,28 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 3.5,
         shadowOpacity: 1,
-        marginBottom:23,
+        marginBottom: 23,
     },
-    buttontext:{
-        textAlign:'center',
+    buttontext: {
+        textAlign: 'center',
         height: 50,
-        lineHeight:50,
+        lineHeight: 50,
         fontSize: 18,
-        color:'#fff',
-        textAlignVertical:'center',
+        color: '#fff',
+        textAlignVertical: 'center',
 
     },
-    footeritem:{
+    footeritem: {
         height: 20,
         lineHeight: 20,
-        flexDirection:'row',
-        justifyContent:'space-between',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
-    footertext:{
+    footertext: {
         fontSize: 16,
         color: "#f10000",
         lineHeight: 20,
-        textAlignVertical:'center',
+        textAlignVertical: 'center',
     }
 
 });
