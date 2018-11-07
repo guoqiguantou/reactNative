@@ -1,5 +1,5 @@
 # reactNative
-![](https://github.com/guoqiguantou/reactnative/raw/master/res/img/index.png) 
+![](https://github.com/guoqiguantou/reactnative/raw/master/res/img/login.png) 
 ## 用到的库
 * react-navigation：导航器路由
 * react-native-tab-navigator：底部Tab切换
